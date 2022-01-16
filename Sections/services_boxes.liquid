@@ -1,0 +1,273 @@
+<section id="services_boxes">
+
+   {% for block in section.blocks %}
+      {% if block.settings.type == "false" %}
+
+         <div class="services_boxes__box">
+            <div class="box_header">
+               <h3>{{ block.settings.box_header }}</h3>
+               <h4>{{ block.settings.box_subheader }}</h4>
+            </div>
+            <div class="box_content">
+               <div class="content_header">
+                  <h5>{{ block.settings.content_header }}</h5>
+                  <h6>{{ block.settings.content_subheader }}</h6>
+               </div>
+               <div class="content">
+                  {{ block.settings.content }}
+               </div>
+               <a href="{{ block.settings.button }}" class="button">{{ block.settings.buttontext }}</a>
+            </div>
+         </div>
+
+      {% else %}
+
+         <div class="services_boxes__box-featured">
+            <div class="box_header">
+               <h3>{{ block.settings.box_header }}</h3>
+               <h4>{{ block.settings.box_subheader }}</h4>
+            </div>
+            <div class="box_content">
+               <div class="content_header">
+                  <h5>{{ block.settings.content_header }}</h5>
+                  <h6>{{ block.settings.content_subheader }}</h6>
+               </div>
+               <div class="content">
+                  {{ block.settings.content }}
+               </div>
+               <a href="{{ block.settings.button }}" class="button">{{ block.settings.buttontext }}</a>
+            </div>
+         </div>
+
+      {% endif %}
+   {% endfor %}
+
+</section>
+
+
+{% schema %}
+   
+{
+"name":"Services Boxes",
+"blocks":[
+   {
+      "type":"box",
+      "name":"Product Box",
+      "settings":[
+         {
+            "id":"type",
+            "type":"select",
+            "label":"Feature This Product?",
+            "options":[
+               {
+                  "value":"true",
+                  "label":"Yes"
+               },
+               {
+                  "value":"false",
+                  "label":"No"
+               }
+            ],
+            "default":"false"
+         },
+         {
+            "id":"box_header",
+            "type":"text",
+            "label":"Product Box Header",
+            "default":"Product Box Header"
+         },
+         {
+            "id":"box_subheader",
+            "type":"text",
+            "label":"Product Box Subheader"
+         },
+         {
+            "id":"content_header",
+            "type":"text",
+            "label":"Content Header",
+            "default":"Content Header"
+            },
+            {
+               "id":"content_subheader",
+               "type":"text",
+               "label":"Content Subheader",
+               "default":"Content Subheader"
+            },
+         {
+            "id":"content",
+            "type":"html",
+            "label":"Services Box Content",
+            "default":"Lorem ipsum dolor, lorem ipsum dolor."
+         },
+         {
+            "id": "button",
+            "type": "url",
+            "label": "Button link"
+         },
+         {
+            "id": "buttontext",
+            "type": "text",
+            "label": "Button text",
+            "default": "Click here"
+         }
+      ]
+   }
+],
+"presets":[
+   {
+      "name":"Services - Boxes",
+      "category":"Services"
+   }
+]
+}
+
+{% endschema %}
+
+{% stylesheet %}
+
+#services_boxes {
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   align-items: center;
+   justify-content: center;
+}
+
+#services_boxes .services_boxes__box-featured, #services_boxes .services_boxes__box {
+   display: flex;
+   flex-direction: column;
+   margin: 1rem 5px;
+   border: 1px solid #b5b5b5;
+   height: 480px;
+   width: 32%;
+   border-radius: 4px;
+   box-shadow: 5px 3px 6px rgb(0 0 0 / 20%);
+}
+
+#services_boxes .box_content, #services_boxes .box_header {
+   padding: 1.5rem;
+}
+
+#services_boxes .box_content {
+   padding-top: 0;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   height: 81%;
+}
+
+#services_boxes .box_content .content_header {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   width: 110%;
+   padding: 1rem 0;
+   margin: 0 -1.5rem 0 -1.5rem;
+}
+
+#services_boxes .box_content .content_header::after {
+   content: "";
+   width: 90%;
+   height: 0.2px;
+   background-color: #000;
+   margin: 18px 0 2px;
+}
+
+#services_boxes .content_header h5 {
+   font-weight: 800;
+   text-transform: none;
+   letter-spacing: 0.5px;
+   font-size: 18px;
+   line-height: 28px;
+}
+
+#services_boxes .content_header h6 {
+   text-transform: none;
+   line-height: 24px;
+   font-size: 16px;
+   color: #333;
+}
+
+#services_boxes .box_header {
+   background-color: #1f2021;
+}
+
+#services-boxes .services_boxes__box-featured .box_header {
+   background-color: #27abe5;
+}
+
+#services_boxes h3, #services_boxes h4, #services_boxes h5, #services_boxes h6 {
+   text-align: center;
+   margin: 0;
+}
+
+#services_boxes h3 {
+   font-size: 25px;
+}
+
+#services_boxes .box_header h3,  #services_boxes .box_header h4 {
+   color: #fff;
+   margin-bottom: 0;
+}
+
+#services_boxes .content {
+   margin: 0 10px;
+   margin-bottom: auto;
+}
+
+#services_boxes p {
+   margin: 0;
+}
+
+#services_boxes .button {
+   font-family: Lora, serif;
+   display: inline-block;
+   margin: 0;
+   padding: 12px 20px;
+   font-size: 13px;
+   cursor: pointer;
+   text-decoration: none;
+   color: #fff;
+   background-color: #1f2021;
+   border: none;
+   border-radius: 0.62em;
+   transform: translateY(0em);
+   -webkit-transition: all .15s ease-out;
+   -moz-transition: all .15s ease-out;
+   -ms-transition: all .15s ease-out;
+   -o-transition: all .15s ease-out;
+   transition: all .15s ease-out;
+}
+
+#services_boxes .button:hover {
+   background-color: #3d3f41!important;
+   color: #fff;
+   transform: translateY(-0.25em);
+}
+
+#services_boxes .services_boxes__box-featured {
+   height: 520px;
+}
+
+#services_boxes .services_boxes__box-featured .box_header, #services_boxes .services_boxes__box-featured .button {
+   background-color: #009fe5;
+}
+
+#services_boxes .services_boxes__box-featured .button:hover {
+   background-color: #0070a1;
+}
+
+@media and (max-width: 768px) {
+   #services_boxes {
+      flex-direction: column;
+   }
+
+   #services_boxes .services_boxes__box {
+      width: 100%;
+   }
+}
+
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

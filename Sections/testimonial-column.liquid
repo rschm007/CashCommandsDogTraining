@@ -1,0 +1,184 @@
+<section id="testimonial-column">
+
+   {% for block in section.blocks %}
+      {% if block.settings.type == "image"  %}
+
+         <div class="col">
+            <div class="testimonial-img">
+
+               <div class="text-overlay">
+                  <p class="testimonial">
+                     {{ block.settings.testimonial }}
+                  </p>
+                  <p class="attribution">
+                     — {{ block.settings.attribution}}
+                  </p>
+               </div>
+
+               {{ block.settings.image | img_url: 'master' | img_tag }}
+
+            </div>
+         </div>
+
+         {% else %}
+
+         <div class="col">
+            <div class="testimonial-text">
+               <h2 class="attribution">
+                   {{ block.settings.attribution }}
+                </h2>
+                <p class="testimonial">
+                   {{ block.settings.testimonial }}
+                </p>
+            </div>
+         </div>
+
+      {% endif %}
+   {% endfor %}
+
+</section>
+
+{% schema %}
+
+{
+"name":"Testimonial Column 2",
+"class": "testimonial-column-2",
+"blocks":[
+   {
+      "type":"column",
+      "name":"Column",
+      "settings":[
+         {
+            "id":"type",
+            "type":"select",
+            "label":"Testimonial Type",
+            "options":[
+               {
+                  "value":"image",
+                  "label":"Image"
+               },
+               {
+                  "value":"text",
+                  "label":"Text"
+               }
+            ],
+            "default":"text"
+         },
+         {
+            "id":"image",
+            "type":"image_picker",
+            "label":"Image"
+         },
+         {
+            "id":"testimonial",
+            "type":"text",
+            "label":"Testimonial Content",
+            "default":"Lorem ipsum dolor, lorem ipsum dolor."
+         },
+         {
+            "id":"attribution",
+            "type":"text",
+            "label":"Attribution",
+            "default":"John Smith."
+         }
+      ]
+   }
+],
+"presets":[
+   {
+      "name":"Content-Testimonial, image 2",
+      "category":"Content"
+   }
+]
+}
+
+
+{% endschema %}
+
+{% stylesheet %}
+
+#testimonial-column {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+ margin: 2rem 0;
+ column-gap: 2rem;
+}
+
+#testimonial-column .col {
+display: flex;
+flex-direction: column;
+width: 40%;
+align-items: center;
+text-align: left;
+}
+
+#testimonial-column .testimonial-img {
+  display: flex;
+  place-content: center;
+}
+
+#testimonial-column .testimonial-img .text-overlay {
+position: absolute;
+align-self: center;
+justify-self: center;
+max-width: 350px;
+background-color: #fff;
+padding: 1rem;
+opacity: 0.0;
+transition: opacity 0.2s ease-in-out;
+}
+
+#testimonial-column .col:hover > .testimonial-img > .text-overlay {
+   transition: opacity 0.2s ease-in-out;
+  opacity: 0.8;
+}
+
+#testimonial-column .testimonial-img .text-overlay p {
+  color: #000;
+}
+#testimonial-column .col .testimonial {
+font-style: italic;
+}
+
+#testimonial-column .col .attribution {
+   font-weight: 800;
+}
+
+#testimonial-column .col h2.attribution {
+   font-size: 24px;
+   text-decoration: underline;
+}
+
+
+#testimonial-column .testimonial-img img {
+width: 450px;
+height: 450px;
+min-height: 450px;
+min-width: 450px;
+max-width: 450px;
+max-height: 450px;
+object-fit: cover;
+}
+
+@media screen and (max-width: 768px) {
+  #testimonial-column {
+     flex-direction:column;
+  }
+
+  #testimonial-column .col {
+     width: 100%!important;
+     padding: 2rem 1.5rem;
+  }
+
+  #testimonial-column .testimonial-img .text-overlay {
+     opacity: 1 !important;
+     max-width: 80%;
+  }
+}
+
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

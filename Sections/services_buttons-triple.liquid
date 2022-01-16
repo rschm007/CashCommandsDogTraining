@@ -1,0 +1,163 @@
+<section id="services_buttons" style="background-image:url('{{section.settings.image.src | img_url: 'master'}}')">
+
+    {% for block in section.blocks %}
+
+          <div class="services_button_column">
+             <div class="button_caption">
+                <h3>{{ block.settings.button_caption }}</h3>
+             </div>
+            <a href="{{ block.settings.button }}" class="button">{{ block.settings.buttontext }}</a>
+          </div>
+
+    {% endfor %}
+ 
+ </section>
+ 
+ 
+ {% schema %}
+    
+ {
+    "name":"Button Columns",
+    "blocks":[
+       {
+          "type":"Button",
+          "name":"Button",
+          "settings":[
+             {
+                "id":"button_caption",
+                "type":"text",
+                "label":"Button caption"
+             },
+             {
+                "id":"button",
+                "type":"url",
+                "label":"Button link"
+             },
+             {
+                "id":"buttontext",
+                "type":"text",
+                "label":"Button text",
+                "default":"Click here"
+             }
+          ]
+       }
+    ],
+    "settings":[
+       {
+          "id":"image",
+          "type":"image_picker",
+          "label":"Background Image"
+       }
+    ],
+    "presets":[
+       {
+          "name":"Services - Button Columns",
+          "category":"Services"
+       }
+    ]
+ }
+ 
+ {% endschema %}
+ 
+ {% stylesheet %}
+ 
+#services_buttons {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: 3rem 0;
+    height: 400px;
+    background: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+#services_buttons .services_button_column {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 250px;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+    margin: 0 1.5rem;
+    border: 1px solid #b5b5b5;
+    border-radius: 4px;
+    box-shadow: 5px 3px 6px rgb(0 0 0 / 20%);
+    padding: 1.5rem;
+    background-color: rgba(250 250 250 / 90%);
+}
+
+#services_buttons .services_button_column .button_caption {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#services_buttons .services_button_column .button_caption h3 {
+    font-size: 16px;
+    text-transform: none;
+    font-weight: 600;
+    padding-bottom: 10px;
+    letter-spacing: 0.8px;
+    line-height: 21px;
+}
+
+#services_buttons .services_button_column .button_caption::after {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 0.2px;
+    background-color: #000;
+}
+
+#services_buttons .services_button_column .button {
+    font-family: Lora, serif;
+    display: inline-block;
+    margin: 0;
+    padding: 12px 20px;
+    font-size: 13px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+    background-color: #1f2021;
+    border: none;
+    border-radius: 0.62em;
+    transform: translateY(0em);
+    -webkit-transition: all .15s ease-out;
+    -moz-transition: all .15s ease-out;
+    -ms-transition: all .15s ease-out;
+    -o-transition: all .15s ease-out;
+    transition: all .15s ease-out;
+    margin-top: 20px;
+}
+
+#services_buttons .services_button_column .button:hover {
+    background-color: #3d3f41!important;
+    color: #fff;
+    transform: translateY(-0.25em);
+}
+
+@media screen and (max-width: 768px) {
+   #services_buttons {
+      flex-direction: column;
+      height: min-content;
+      padding: 3rem 0;
+   }
+
+   #services_buttons .services_button_column {
+      width: 80%;
+      margin: 1rem 1.5rem;
+      height: min-content;
+   }
+}
+
+ {% endstylesheet %}
+ 
+ {% javascript %}
+ {% endjavascript %}
+ 

@@ -1,0 +1,146 @@
+<section class="content_section">
+    <div class="content_wrapper">
+  
+        <div class="content_body">
+  
+          <div class="content">
+            <h2 class="content_header rich-text__heading--large section-header__title h1">
+              {{ section.settings.heading }}
+            </h2>
+  
+            <p class="content_text">
+                {{ section.settings.content }}
+            </p>
+  
+            <div class="content_list">
+              <ul>
+                {% for block in section.blocks %}
+                  <li>{{ block.settings.list_item }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+  
+          </div>
+        </div>
+  
+  
+  
+    </div>
+  </section>
+  
+  {% schema %}
+    
+  {
+    "name":"Content Section",
+    "settings":[
+       {
+          "id":"heading",
+          "type":"text",
+          "label":"Heading",
+          "default":"Heading Goes Here"
+       },
+       {
+          "id":"content",
+          "type":"richtext",
+          "label":"Text Content"
+       }
+    ],
+    "blocks":[
+       {
+          "type":"list",
+          "name":"List Item",
+          "settings":[
+             {
+                "id":"list_item",
+                "type":"textarea",
+                "label":"List Item"
+             }
+          ]
+       }
+    ],
+    "presets":[
+       {
+          "name":"Content Section",
+          "category":"Services"
+       }
+    ]
+  }
+  
+  {% endschema %}
+  
+  {% stylesheet %}
+  
+  .content_section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+  }
+  
+  .content_section .content_wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .content_section .content_body.hidden {
+      display: none;
+  }
+  
+  .content_section .content_body {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .content_section .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    padding: 1.5rem 4.5rem;
+  }
+  
+  .content_section .content h2.content_header {
+    text-align: center;
+  }
+  
+  .content_section .content .content_list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style-position: inside;
+  }
+  
+  .content_section .content .content_list ul {
+    -moz-column-count: 2;
+    -webkit-column-count: 2;
+    column-count: 2;
+    text-align: center;
+    text-align: left;
+    column-gap: 50px;
+    width: 80%;
+    margin-left: auto;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .content_section .content_body {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .content_section .content {
+      width: 80%;
+      padding: 0;
+    }
+  
+    .content_section .content .content_list ul {
+      -moz-column-count: 1;
+      -webkit-column-count: 1;
+      column-count: 1;
+    }
+  }
+  
+  {% endstylesheet %}
+  
+  {% javascript %}
+  {% endjavascript %}
+  

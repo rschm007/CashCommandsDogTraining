@@ -1,0 +1,53 @@
+<div class="asterisk_content" style="font-size: {{ section.settings.fontsize }}px;">
+    <p>*{{section.settings.text}}</p>
+</div>
+  
+  
+  {% schema %}
+    
+  {
+    "name":"Asterisk Line",
+    "settings":[
+       {
+          "id":"text",
+          "type":"text",
+          "label":"Asterisk Content",
+          "default":"Lorem ipsum dolor"
+       },
+       {
+         "type": "range",
+         "id": "fontsize",
+         "min": 8,
+         "max": 20,
+         "step": 1,
+         "unit": "px",
+         "label": "Font size",
+         "default": 14
+     },
+    ],
+    "presets":[
+       {
+          "name":"Asterisk Line",
+          "category":"Content"
+       }
+    ]
+ }
+  
+  {% endschema %}
+  
+  {% stylesheet %}
+
+  .asterisk_content {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: center;
+   text-align: center;
+   font-size: 12px;
+  }
+  
+  {% endstylesheet %}
+  
+  {% javascript %}
+  {% endjavascript %}
+  

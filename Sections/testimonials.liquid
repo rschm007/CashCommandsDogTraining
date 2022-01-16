@@ -1,0 +1,19 @@
+{% for block in section.blocks %}
+{% case block.type %}
+        {% when 'slideshow' %}
+        {% include 'slideshow' %}
+    {% endcase %}
+{% endfor %}
+
+{% schema %}
+  {
+    "name": "Section name",
+    "settings": []
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

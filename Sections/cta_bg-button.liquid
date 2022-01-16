@@ -1,0 +1,122 @@
+<div id="cta_bg-button" style="background-image:url('{{section.settings.image.src | img_url: 'master'}}')"​​​​​​>
+  <div class="cta_wrapper">
+    <h2 class="rich-text__heading--large section-header__title h1"> {{ section.settings.text-box }} </h2>
+    {{ section.settings.content }}
+    <a href="{{ section.settings.link }}" class="button">{{ section.settings.linktext }}</a>
+  </div>
+</div>
+
+{% schema %}
+
+{
+    "name": "CTA - Bg Image and Button",
+    "settings": [
+      {
+          "id":"image",
+          "type":"image_picker",
+          "label":"Background Image"
+      },
+      {
+        "id": "text-box",
+        "type": "text",
+        "label": "Heading",
+        "default": "Heading"
+      },
+      {
+        "id":"content",
+        "type":"html",
+        "label":"Content",
+        "default":"Content goes here."
+      },
+      {
+        "id": "link",
+        "type": "url",
+        "label": "Button link"
+      },
+      {
+        "id": "linktext",
+        "type": "text",
+        "label": "Button text",
+        "default": "Click here"
+      }
+    ],
+    "presets": [
+      {
+        "name": "CTA - Bg Image and Button",
+        "category": "Call To Action"
+      }
+    ]
+  }
+
+{% endschema %}
+
+{% stylesheet %}
+
+  #cta_bg-button {
+      background-size: cover;
+      display: flex;
+      flex-direction: column!important;
+      place-items: flex-end;
+      text-align: center;
+      width: 100%;
+      height: 551px;
+      padding-right: 10%;
+      background-repeat: no-repeat;
+  }
+
+  #cta_bg-button .cta_wrapper {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin: auto 0;
+    max-width: 80%;
+    padding-left: 30%;
+  }
+
+#cta_bg-button .button {
+    font-family: Lora, serif;
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 13px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+    background-color: #1f2021;
+    border: none;
+    border-radius: 0.62em;
+    max-width: max-content;
+    transform: translateY(0em);
+    -webkit-transition: all .15s ease-out;
+    -moz-transition: all .15s ease-out;
+    -ms-transition: all .15s ease-out;
+    -o-transition: all .15s ease-out;
+    transition: all .15s ease-out;
+}
+
+#cta_bg-button .button:hover {
+    background-color: #3d3f41!important;
+    color: #fff;
+    transform: translateY(-0.25em);
+}
+
+@media screen and (max-width: 768px) {
+  #cta_bg-button {
+    width: 100%;
+    height: 920px;
+    padding-right: 10%;
+    background-repeat: no-repeat;
+    background-position: bottom;
+  }
+
+  #cta_bg-button .cta_wrapper {
+    max-width: 100%;
+    padding-left: 22%;
+  }
+
+}
+
+
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

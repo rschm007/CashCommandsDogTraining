@@ -1,0 +1,65 @@
+<section id="content_header-subheader">
+  
+   <div class="wrapper">
+
+       {% if section.settings.header %}
+           <h2 class="rich-text__heading--large section-header__title h1">{{ section.settings.header }}</h2>
+       {% endif %}
+
+       {% if section.settings.subheader %}
+           <h4>{{ section.settings.subheader }}</h4>
+       {% endif %}
+
+   </div>
+
+</section>
+ 
+ {% schema %}
+
+ {
+   "name":"Header + Subheader",
+   "settings":[
+      {
+         "id":"header",
+         "type":"text",
+         "label":"Header",
+         "default":"Header"
+      },
+      {
+         "id":"subheader",
+         "type":"text",
+         "label":"Subheader",
+         "default":"Subheader"
+      }
+   ],
+   "presets":[
+      {
+         "name":"Content-Header, Subheader",
+         "category":"Content"
+      }
+   ]
+}
+ 
+ 
+ {% endschema %}
+ 
+ {% stylesheet %}
+ 
+ #content_header-subheader {
+   display: flex;
+   align-items: center;
+   text-align: center;
+   margin: 2rem 0;
+ }
+
+ @media screen and (max-width: 768px) {
+    .content_header-subheader {
+       margin: 2rem 0 -1rem;
+    }
+ }
+ 
+ {% endstylesheet %}
+ 
+ {% javascript %}
+ {% endjavascript %}
+ 

@@ -1,0 +1,53 @@
+<div id="content_bg-image" style="background-image:url('{{section.settings.image.src | img_url: 'master'}}'); height:{{ section.settings.height }}px"​​​​​​>
+</div>
+  
+  {% schema %}
+  {
+    "name":"Bg Image",
+    "settings":[
+       {
+          "id":"image",
+          "type":"image_picker",
+          "label":"Background Image"
+       },
+       {
+           "id":"height",
+           "type":"range",
+           "min": 150,
+            "max": 550,
+            "step": 1,
+            "unit": "px",
+            "label":"Image height",
+            "default": 400
+       }
+    ],
+    "presets":[
+       {
+          "name":"Bg Image",
+          "category":"Content"
+       }
+    ]
+ }
+  
+  {% endschema %}
+  
+  {% stylesheet %}
+  
+    #content_bg-image{
+        background-size: cover;
+        display: flex;
+        flex-direction: column!important;
+        place-items: flex-end;
+        text-align: center;
+        width: 100%;
+        height: 551px;
+        padding-right: 10%;
+        background-repeat: no-repeat;
+    }
+  
+  
+  {% endstylesheet %}
+  
+  {% javascript %}
+  {% endjavascript %}
+  
