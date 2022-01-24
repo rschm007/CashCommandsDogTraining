@@ -1,9 +1,7 @@
 <section id="content_image-text">
   <div class="content_wrapper">
 
-    {% if section.settings.alignment == "left" %}
-
-      <div class="content_body">
+      <div class="content_body" style="flex-direction:{{ section.settings.alignment }}">
         <div class="image">
 
           {% if section.settings.radius == "rounded" %}
@@ -21,37 +19,21 @@
           {{ section.settings.content }}
 
           {% if section.settings.button-boolean == "true" %}
-            <a href="{{ section.settings.link }}" class="button">{{ section.settings.linktext }}</a>
+          <a href="{{ section.settings.link }}" class="button" style="color:{{ section.settings.button-text-color }}; background-color:{{ section.settings.button-bg }}; flex-direction:{{ section.settings.button-icon-position }};">
+    
+            {% if section.settings.button-icon %}
+              <img src="{{ section.settings.button-icon | img_url: 'master' }}" 
+              style="width:{{ section.settings.button-icon-size }}px; 
+              height:{{ section.settings.button-icon-size }}px;
+              filter:{{ section.settings.button-icon-color }};">
+            {% endif %}
+              
+            {{ section.settings.linktext }}</a>
+
           {% endif %}
 
         </div>
       </div>
-
-    {% else %}
-
-        <div class="content_body">
-          <h2 class="content_header rich-text__heading--large section-header__title h1">
-            {{ section.settings.heading }}
-          </h2>
-
-          {{ section.settings.content }}
-
-          {% if section.settings.button-boolean == "true" %}
-            <a href="{{ section.settings.link }}" class="button">{{ section.settings.linktext }}</a>
-          {% endif %}
-
-        </div>
-        <div class="image">
-
-          {% if section.settings.radius == "rounded" %}
-            <img src="{{ section.settings.image | img_url: 'master' }}" style="border-radius: 100%">
-          {% else %}
-            {{ section.settings.image | img_url: 'master' | img_tag }}
-          {% endif %}
-
-        </div>
-
-    {% endif %}
 
   </div>
 </section>
@@ -72,15 +54,15 @@
         "label":"Image Alignment",
         "options":[
            {
-              "value":"left",
+              "value":"row",
               "label":"Left"
            },
            {
-              "value":"right",
+              "value":"row-reverse",
               "label":"Right"
            }
         ],
-        "default":"left"
+        "default":"row"
      },
      {
         "id":"radius",
@@ -132,11 +114,70 @@
         "label":"Button link"
      },
      {
+      "id": "button-icon",
+      "type": "image_picker",
+      "label": "Button Icon (*please use a transparent PNG)"
+    },
+    {
+      "id": "button-icon-color",
+      "type": "radio",
+      "label": "Icon Color",
+      "options": [
+        {
+          "value": "brightness(0) invert(1)",
+          "label": "White"
+        },
+        {
+          "value": "",
+          "label": "Default"
+        }
+      ],
+      "default": "brightness(0) invert(1)"
+    },
+    {
+      "id": "button-icon-position",
+      "type": "radio",
+      "label": "Icon Position",
+      "options": [
+        {
+          "value": "row",
+          "label": "Left"
+        },
+        {
+          "value": "row-reverse",
+          "label": "Right"
+        }
+      ],
+      "default": "row"
+    },
+    {
+      "id": "button-icon-size",
+      "type": "range",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Icon Size",
+      "default": 16
+    },
+     {
         "id":"linktext",
         "type":"text",
         "label":"Button text",
         "default":"Click here"
-     }
+     },
+     {
+      "id": "button-text-color",
+      "type": "color",
+      "label": "Button Text Color",
+      "default": "#fff"
+    },
+    {
+      "id": "button-bg",
+      "type": "color",
+      "label": "Button Background Color",
+      "default": "#1f2021"
+    }
   ],
   "presets":[
      {
@@ -188,7 +229,7 @@
 #content_image-text .button {
 	width: max-content;
   font-family: Lora, serif;
-  display: inline-block;
+  display: flex;
   padding: 12px 20px;
   font-size: 13px;
   cursor: pointer;
@@ -209,6 +250,10 @@
   background-color: #3d3f41!important;
   color: #fff;
   transform: translateY(-0.25em);
+}
+
+#content_image-text .button img {
+  margin: 0 10px;
 }
 
 .index-sections .shopify-section:nth-child(4) {

@@ -1,6 +1,18 @@
 <div id="cta_cta-button">
-  <h2 class="rich-text__heading--large section-header__title h1"> {{ section.settings.text-box }} </h2>
-  <a href="{{ section.settings.link }}" class="button">{{ section.settings.linktext }}</a>
+  <h2 class="rich-text__heading--large section-header__title h1" style="color:{{ section.settings.header-text-color }};"> {{ section.settings.text-box }} </h2>
+
+  <a href="{{ section.settings.link }}" class="button" style="color:{{ section.settings.button-text-color }}; background-color:{{ section.settings.button-bg }}; flex-direction:{{ section.settings.button-icon-position }};">
+    
+    {% if section.settings.button-icon %}
+      <img src="{{ section.settings.button-icon | img_url: 'master' }}" 
+      style="width:{{ section.settings.button-icon-size }}px; 
+      height:{{ section.settings.button-icon-size }}px;
+      filter:{{ section.settings.button-icon-color }};">
+    {% endif %}
+
+    {{ section.settings.linktext }}
+  </a>
+  
 </div>
 
 {% schema %}
@@ -20,10 +32,75 @@
         "label": "Button link"
       },
       {
+        "id": "button-icon",
+        "type": "image_picker",
+        "label": "Button Icon (*please use a transparent PNG)"
+      },
+      {
+        "id": "button-icon-color",
+        "type": "radio",
+        "label": "Icon Color",
+        "options": [
+          {
+            "value": "brightness(0) invert(1)",
+            "label": "White"
+          },
+          {
+            "value": "",
+            "label": "Default"
+          }
+        ],
+        "default": "brightness(0) invert(1)"
+      },
+      {
+        "id": "button-icon-position",
+        "type": "radio",
+        "label": "Icon Position",
+        "options": [
+          {
+            "value": "row",
+            "label": "Left"
+          },
+          {
+            "value": "row-reverse",
+            "label": "Right"
+          }
+        ],
+        "default": "row"
+      },
+      {
+        "id": "button-icon-size",
+        "type": "range",
+        "min": 0,
+        "max": 20,
+        "step": 1,
+        "unit": "px",
+        "label": "Icon Size",
+        "default": 16
+      },
+      {
         "id": "linktext",
         "type": "text",
         "label": "Button text",
         "default": "Click here"
+      },
+      {
+        "id": "header-text-color",
+        "type": "color",
+        "label": "Header Text Color",
+        "default": "#000"
+      },
+      {
+        "id": "button-text-color",
+        "type": "color",
+        "label": "Button Text Color",
+        "default": "#fff"
+      },
+      {
+        "id": "button-bg",
+        "type": "color",
+        "label": "Button Background Color",
+        "default": "#1f2021"
       }
     ],
     "presets": [
@@ -49,7 +126,7 @@
 
 #cta_cta-button .button {
     font-family: Lora, serif;
-    display: inline-block;
+    display: flex;
 	  margin-top: 1rem;
     padding: 12px 20px;
     font-size: 13px;
@@ -65,6 +142,10 @@
     -ms-transition: all .15s ease-out;
     -o-transition: all .15s ease-out;
     transition: all .15s ease-out;
+}
+
+#cta_cta-button .button img {
+  margin: 0 10px;
 }
 
 #cta_cta-button .button:hover {

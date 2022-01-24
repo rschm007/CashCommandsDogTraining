@@ -4,7 +4,15 @@
       {% if block.settings.type == "false" %}
 
          <div class="services_boxes__box">
-            <div class="box_header">
+            <div class="box_header" style="background-color:{{ block.settings.header-background }};">
+
+               {% if block.settings.image %}
+                  <img src="{{ block.settings.image | img_url: 'master' }}" 
+                  style="width:{{ block.settings.image-size }}px; 
+                  height:{{ block.settings.image-size }}px;
+                  filter:{{ block.settings.image-color }};">
+               {% endif %}
+
                <h3>{{ block.settings.box_header }}</h3>
                <h4>{{ block.settings.box_subheader }}</h4>
             </div>
@@ -16,14 +24,36 @@
                <div class="content">
                   {{ block.settings.content }}
                </div>
-               <a href="{{ block.settings.button }}" class="button">{{ block.settings.buttontext }}</a>
+
+                  <a href="{{ block.settings.button }}" class="button" style="color:{{ section.settings.button-text-color }}; background-color:{{ section.settings.button-bg }}; flex-direction:{{ section.settings.button-icon-position }};">
+                  
+                     {% if block.settings.button-icon %}
+                     <img src="{{ block.settings.button-icon | img_url: 'master' }}" 
+                     style="width:{{ block.settings.button-icon-size }}px; 
+                     height:{{ block.settings.button-icon-size }}px;
+                     filter:{{ block.settings.button-icon-color }};">
+                     {% endif %}
+
+                  {{ block.settings.buttontext }}
+
+               </a>
+            
+            
             </div>
          </div>
 
       {% else %}
 
          <div class="services_boxes__box-featured">
-            <div class="box_header">
+            <div class="box_header" style="background-color:{{ block.settings.header-background}}";>
+               
+               {% if block.settings.image %}
+               <img src="{{ block.settings.image | img_url: 'master' }}" 
+               style="width:{{ block.settings.image-size }}px; 
+               height:{{ block.settings.image-size }}px;
+               filter:{{ block.settings.image-color }};">
+               {% endif %}
+               
                <h3>{{ block.settings.box_header }}</h3>
                <h4>{{ block.settings.box_subheader }}</h4>
             </div>
@@ -71,10 +101,46 @@
             "default":"false"
          },
          {
+            "id": "image",
+            "type": "image_picker",
+            "label": "Header Image (*please use a transparent PNG)"
+          },
+          {
+            "id": "image-color",
+            "type": "radio",
+            "label": "Image Color",
+            "options": [
+              {
+                "value": "brightness(0) invert(1)",
+                "label": "White"
+              },
+              {
+                "value": "",
+                "label": "Default"
+              }
+            ],
+            "default": "brightness(0) invert(1)"
+          },
+          {
+            "id": "image-size",
+            "type": "range",
+            "min": 16,
+            "max": 40,
+            "step": 1,
+            "unit": "px",
+            "label": "Image Size",
+            "default": 32
+          },
+         {
             "id":"box_header",
             "type":"text",
             "label":"Product Box Header",
             "default":"Product Box Header"
+         },
+         {
+            "id": "header-background",
+            "type": "color",
+            "label": "Header Background Color"     
          },
          {
             "id":"box_subheader",
@@ -109,7 +175,66 @@
             "type": "text",
             "label": "Button text",
             "default": "Click here"
-         }
+         },
+         {
+            "id": "button-icon",
+            "type": "image_picker",
+            "label": "Button Icon (*please use a transparent PNG)"
+          },
+          {
+            "id": "button-icon-color",
+            "type": "radio",
+            "label": "Icon Color",
+            "options": [
+              {
+                "value": "brightness(0) invert(1)",
+                "label": "White"
+              },
+              {
+                "value": "",
+                "label": "Default"
+              }
+            ],
+            "default": "brightness(0) invert(1)"
+          },
+          {
+            "id": "button-icon-position",
+            "type": "radio",
+            "label": "Icon Position",
+            "options": [
+              {
+                "value": "row",
+                "label": "Left"
+              },
+              {
+                "value": "row-reverse",
+                "label": "Right"
+              }
+            ],
+            "default": "row"
+          },
+          {
+            "id": "button-icon-size",
+            "type": "range",
+            "min": 0,
+            "max": 20,
+            "step": 1,
+            "unit": "px",
+            "label": "Icon Size",
+            "default": 16
+          },
+          {
+            "id": "button-text-color",
+            "type": "color",
+            "label": "Button Text Color",
+            "default": "#fff"
+          },
+          {
+            "id": "button-bg",
+            "type": "color",
+            "label": "Button Background Color",
+            "default": "#1f2021"
+          }
       ]
    }
 ],
@@ -138,7 +263,8 @@
    flex-direction: column;
    margin: 1rem 5px;
    border: 1px solid #b5b5b5;
-   height: 480px;
+   height: auto;
+   align-self: baseline;
    width: 32%;
    border-radius: 4px;
    box-shadow: 5px 3px 6px rgb(0 0 0 / 20%);
@@ -190,6 +316,13 @@
 
 #services_boxes .box_header {
    background-color: #1f2021;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+#services_boxes .box_header img {
+   margin-bottom: 1rem;
 }
 
 #services-boxes .services_boxes__box-featured .box_header {
@@ -245,10 +378,6 @@
    transform: translateY(-0.25em);
 }
 
-#services_boxes .services_boxes__box-featured {
-   height: 520px;
-}
-
 #services_boxes .services_boxes__box-featured .box_header, #services_boxes .services_boxes__box-featured .button {
    background-color: #009fe5;
 }
@@ -257,13 +386,18 @@
    background-color: #0070a1;
 }
 
-@media and (max-width: 768px) {
+#services_boxes .services_boxes__box-featured .button img,
+#services_boxes .services_boxes__box .button img  {
+   margin: 0 10px;
+ }
+
+@media screen and (max-width: 768px) {
    #services_boxes {
       flex-direction: column;
    }
 
-   #services_boxes .services_boxes__box {
-      width: 100%;
+   #services_boxes .services_boxes__box-featured, #services_boxes .services_boxes__box{
+      width: 100% !important;
    }
 }
 
