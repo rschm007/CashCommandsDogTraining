@@ -1,4 +1,4 @@
-<div class="content_text" style="margin:{{ section.settings.margin }}px; font-size:{{ section.settings.fontsize }}px; text-align:{{ section.settings.text-align }};">
+<div class="content_text" style="margin:{{ section.settings.margin }}px; font-size:{{ section.settings.fontsize }}px; text-align:{{ section.settings.text-align }}; justify-content:{{ section.settings.text-align }};">
     {{section.settings.text}}
 </div>
   
@@ -60,8 +60,10 @@
    display: flex;
    flex-direction: row;
    align-items: center;
-   justify-content: center;
-   margin: -1rem 0;
+  }
+
+  .content_text p {
+   z-index: 10;
   }
   
   {% endstylesheet %}

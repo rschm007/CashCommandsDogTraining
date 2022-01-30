@@ -1,4 +1,4 @@
-<section id="testimonial-column">
+<section id="testimonial_column_1" class="testimonial_column">
 
    {% for block in section.blocks %}
       {% if block.settings.type == "image"  %}
@@ -41,8 +41,8 @@
 {% schema %}
 
 {
-"name":"Testimonial Column 2",
-"class": "testimonial-column-2",
+"name":"Testimonial Column 1",
+"class": "testimonial_column",
 "blocks":[
    {
       "type":"column",
@@ -97,7 +97,7 @@
 
 {% stylesheet %}
 
-#testimonial-column {
+.testimonial_column {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -106,7 +106,7 @@
  column-gap: 2rem;
 }
 
-#testimonial-column .col {
+.testimonial_column .col {
 display: flex;
 flex-direction: column;
 width: 40%;
@@ -114,12 +114,12 @@ align-items: center;
 text-align: left;
 }
 
-#testimonial-column .testimonial-img {
+.testimonial_column .testimonial-img {
   display: flex;
   place-content: center;
 }
 
-#testimonial-column .testimonial-img .text-overlay {
+.testimonial_column .testimonial-img .text-overlay {
 position: absolute;
 align-self: center;
 justify-self: center;
@@ -130,29 +130,29 @@ opacity: 0.0;
 transition: opacity 0.2s ease-in-out;
 }
 
-#testimonial-column .col:hover > .testimonial-img > .text-overlay {
+.testimonial_column .col:hover > .testimonial-img > .text-overlay {
    transition: opacity 0.2s ease-in-out;
   opacity: 0.8;
 }
 
-#testimonial-column .testimonial-img .text-overlay p {
+.testimonial_column .testimonial-img .text-overlay p {
   color: #000;
 }
-#testimonial-column .col .testimonial {
+.testimonial_column .col .testimonial {
 font-style: italic;
 }
 
-#testimonial-column .col .attribution {
+.testimonial_column .col .attribution {
    font-weight: 800;
 }
 
-#testimonial-column .col h2.attribution {
+.testimonial_column .col h2.attribution {
    font-size: 24px;
    text-decoration: underline;
 }
 
 
-#testimonial-column .testimonial-img img {
+.testimonial_column .testimonial-img img {
 width: 450px;
 height: 450px;
 min-height: 450px;
@@ -163,16 +163,16 @@ object-fit: cover;
 }
 
 @media screen and (max-width: 768px) {
-  #testimonial-column {
+  .testimonial_column {
      flex-direction:column;
   }
 
-  #testimonial-column .col {
+  .testimonial_column .col {
      width: 100%!important;
      padding: 2rem 1.5rem;
   }
 
-  #testimonial-column .testimonial-img .text-overlay {
+  .testimonial_column .testimonial-img .text-overlay {
      opacity: 1 !important;
      max-width: 80%;
   }
