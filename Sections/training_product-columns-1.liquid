@@ -1,0 +1,377 @@
+<section class="training_boxes">
+
+   <hr class="hr--small">
+
+   <h2 class="training_boxes__header rich-text__heading--large section-header__title h1" style="flex-direction:{{ section.settings.header-image-alignment }}">
+      {{ section.settings.heading }}
+    </h2>
+
+    <hr class="hr--small">
+
+    <div class="training_boxes_wrapper">
+
+      {% for block in section.blocks %}
+      {% if block.settings.type == "false" %}
+
+         <div class="training_boxes__box">
+            <div class="box_header" style="background-color:{{ block.settings.header-background }};">
+
+               <h3>{{ block.settings.box_header }}</h3>
+               <h4>{{ block.settings.box_subheader }}</h4>
+            </div>
+            <div class="box_content">
+
+               {% if block.settings.image %}
+                  <a href="{{ block.settings.button }}">
+
+                     <img src="{{ block.settings.image | img_url: 'master' }}">
+
+                  </a>
+               {% endif %}
+
+                  <a href="{{ block.settings.button }}" class="button" style="color:{{ section.settings.button-text-color }}; background-color:{{ section.settings.button-bg }}; flex-direction:{{ section.settings.button-icon-position }};">
+                  
+                     {% if block.settings.button-icon %}
+                     <img src="{{ block.settings.button-icon | img_url: 'master' }}" 
+                     style="width:{{ block.settings.button-icon-size }}px; 
+                     height:{{ block.settings.button-icon-size }}px;
+                     filter:{{ block.settings.button-icon-color }};">
+                     {% endif %}
+
+                  {{ block.settings.buttontext }}
+
+               </a>
+            
+            
+            </div>
+         </div>
+
+      {% else %}
+
+         <div class="training_boxes__box-featured">
+            <div class="box_header" style="background-color:{{ block.settings.header-background }};">
+
+               <h3>{{ block.settings.box_header }}</h3>
+               <h4>{{ block.settings.box_subheader }}</h4>
+            </div>
+            <div class="box_content">
+
+               {% if block.settings.image %}
+                  <a href="{{ block.settings.button }}">
+
+                     <img src="{{ block.settings.image | img_url: 'master' }}">
+
+                  </a>
+               {% endif %}
+
+                  <a href="{{ block.settings.button }}" class="button" style="color:{{ section.settings.button-text-color }}; background-color:{{ section.settings.button-bg }}; flex-direction:{{ section.settings.button-icon-position }};">
+                  
+                     {% if block.settings.button-icon %}
+                     <img src="{{ block.settings.button-icon | img_url: 'master' }}" 
+                     style="width:{{ block.settings.button-icon-size }}px; 
+                     height:{{ block.settings.button-icon-size }}px;
+                     filter:{{ block.settings.button-icon-color }};">
+                     {% endif %}
+
+                  {{ block.settings.buttontext }}
+
+               </a>
+            
+            
+            </div>
+         </div>
+
+      {% endif %}
+   {% endfor %}
+
+    </div>
+
+</section>
+
+
+{% schema %}
+ 
+{
+   "name":"Training Boxes",
+   "settings":[
+      {
+         "id":"heading",
+         "type":"text",
+         "label":"Heading",
+         "default":"Heading Goes Here"
+      }
+   ],
+   "blocks":[
+      {
+         "type":"box",
+         "name":"Product Box",
+         "settings":[
+            {
+               "id":"type",
+               "type":"select",
+               "label":"Feature This Product?",
+               "options":[
+                  {
+                     "value":"true",
+                     "label":"Yes"
+                  },
+                  {
+                     "value":"false",
+                     "label":"No"
+                  }
+               ],
+               "default":"false"
+            },
+            {
+               "id":"image",
+               "type":"image_picker",
+               "label":"Box Content Image"
+            },
+            {
+               "id":"box_header",
+               "type":"text",
+               "label":"Product Box Header",
+               "default":"Product Box Header"
+            },
+            {
+               "id":"header-background",
+               "type":"color",
+               "label":"Header Background Color",
+               "default": "#1f2021"
+            },
+            {
+               "id":"box_subheader",
+               "type":"text",
+               "label":"Product Box Subheader"
+            },
+            {
+               "id":"button",
+               "type":"url",
+               "label":"Button link"
+            },
+            {
+               "id":"buttontext",
+               "type":"text",
+               "label":"Button text",
+               "default":"Click here"
+            },
+            {
+               "id":"button-icon",
+               "type":"image_picker",
+               "label":"Button Icon (*please use a transparent PNG)"
+            },
+            {
+               "id":"button-icon-color",
+               "type":"radio",
+               "label":"Icon Color",
+               "options":[
+                  {
+                     "value":"brightness(0) invert(1)",
+                     "label":"White"
+                  },
+                  {
+                     "value":"",
+                     "label":"Default"
+                  }
+               ],
+               "default":"brightness(0) invert(1)"
+            },
+            {
+               "id":"button-icon-position",
+               "type":"radio",
+               "label":"Icon Position",
+               "options":[
+                  {
+                     "value":"row",
+                     "label":"Left"
+                  },
+                  {
+                     "value":"row-reverse",
+                     "label":"Right"
+                  }
+               ],
+               "default":"row"
+            },
+            {
+               "id":"button-icon-size",
+               "type":"range",
+               "min":0,
+               "max":20,
+               "step":1,
+               "unit":"px",
+               "label":"Icon Size",
+               "default":16
+            },
+            {
+               "id":"button-text-color",
+               "type":"color",
+               "label":"Button Text Color",
+               "default":"#fff"
+            },
+            {
+               "id":"button-bg",
+               "type":"color",
+               "label":"Button Background Color",
+               "default":"#1f2021"
+            }
+         ]
+      }
+   ],
+   "presets":[
+      {
+         "name":"training - Boxes",
+         "category":"training"
+      }
+   ]
+}
+
+{% endschema %}
+
+{% stylesheet %}
+.training_boxes {
+display: flex;
+flex-direction: column;
+flex-wrap: wrap;
+align-items: center;
+justify-content: center;
+margin: 0.5rem 0 3rem;
+}
+
+.training_boxes_wrapper {
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+align-items: center;
+justify-content: center;
+}
+
+.training_boxes__header {
+display: flex;
+align-items: center;
+text-align: center;
+}
+
+.training_boxes__header img {
+   margin: 1rem;
+}
+
+.training_boxes .training_boxes__box-featured,.training_boxes .training_boxes__box {
+display: flex;
+flex-direction: column;
+margin: 1rem 5px;
+height: auto;
+align-self: baseline;
+width: 32%;
+box-shadow: 1px 2px 12px rgb(0 0 0 / 10%);
+border-radius: 4px;
+}
+
+.training_boxes .box_header {
+   padding: 1rem 0.75rem;
+}
+
+.training_boxes .box_content {
+padding: 1rem 1.25rem;
+}
+
+.training_boxes .box_content {
+padding-top: 0;
+display: flex;
+flex-direction: column;
+align-items: center;
+height: 81%;
+}
+
+.training_boxes .box_content .content_header {
+display: flex;
+flex-direction: column;
+align-items: center;
+width: 110%;
+padding: 1rem 0;
+margin: 0 -1.5rem 0 -1.5rem;
+}
+
+.training_boxes .box_header {
+background-color: #1f2021;
+display: flex;
+flex-direction: column;
+align-items: center;
+border-radius: 4px;
+margin: 1rem 1.75rem;
+}
+
+.training_boxes .box_header img {
+margin-bottom: 1rem;d
+}
+
+.training-boxes .training_boxes__box-featured .box_header {
+background-color: #27abe5;
+}
+
+.training_boxes h3,.training_boxes h4,.training_boxes h5,.training_boxes h6 {
+text-align: center;
+margin: 0;
+}
+
+.training_boxes h3 {
+font-size: 25px;
+}
+
+.training_boxes .box_header h3, .training_boxes .box_header h4 {
+color: #fff;
+margin-bottom: 0;
+}
+
+.training_boxes .button {
+font-family: Lora, serif;
+display: inline-block;
+margin: 1rem 0 0;
+padding: 12px 20px;
+font-size: 13px;
+cursor: pointer;
+text-decoration: none;
+color: #fff;
+background-color: #1f2021;
+border: none;
+border-radius: 0.62em;
+transform: translateY(0em);
+-webkit-transition: all .15s ease-out;
+-moz-transition: all .15s ease-out;
+-ms-transition: all .15s ease-out;
+-o-transition: all .15s ease-out;
+transition: all .15s ease-out;
+}
+
+.training_boxes .button:hover {
+background-color: #3d3f41!important;
+color: #fff;
+transform: translateY(-0.25em);
+}
+
+.training_boxes .training_boxes__box-featured .box_header,.training_boxes .training_boxes__box-featured .button {
+background-color: #009fe5;
+}
+
+.training_boxes .training_boxes__box-featured .button:hover {
+background-color: #0070a1;
+}
+
+.training_boxes .training_boxes__box-featured .button img,
+.training_boxes .training_boxes__box .button img  {
+margin: 0 10px;
+}
+
+@media screen and (max-width: 768px) {
+.training_boxes {
+   flex-direction: column;
+}
+
+.training_boxes .training_boxes__box-featured,.training_boxes .training_boxes__box{
+   width: 100% !important;
+}
+}
+
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

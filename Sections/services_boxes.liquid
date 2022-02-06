@@ -65,7 +65,20 @@
                <div class="content">
                   {{ block.settings.content }}
                </div>
-               <a href="{{ block.settings.button }}" class="button">{{ block.settings.buttontext }}</a>
+
+               <a href="{{ block.settings.button }}" class="button" style="color:{{ section.settings.button-text-color }}; background-color:{{ section.settings.button-bg }}; flex-direction:{{ section.settings.button-icon-position }};">
+                  
+                  {% if block.settings.button-icon %}
+                  <img src="{{ block.settings.button-icon | img_url: 'master' }}" 
+                  style="width:{{ block.settings.button-icon-size }}px; 
+                  height:{{ block.settings.button-icon-size }}px;
+                  filter:{{ block.settings.button-icon-color }};">
+                  {% endif %}
+
+               {{ block.settings.buttontext }}
+
+            </a>
+
             </div>
          </div>
 

@@ -1,18 +1,11 @@
 <section id="content_testimonial-image">
     <div class="content_wrapper">
   
-      {% if section.settings.alignment == "left" %}
-  
-    {% if section.settings.hide-boolean == "true" %}
-        <div class="content_body hidden">
-    {% else %}
-        <div class="content_body">
-    {% endif %}
-
+        <div class="content_body" style="flex-direction: {{ section.settings.alignment }};">
           <div class="image">
             {{ section.settings.image | img_url: 'master' | img_tag }}
           </div>
-          <div class="content">
+          <div class="content" style="border-color:{{ section.settings.quote-border-color }};">
             <h2 class="content_header rich-text__heading--large section-header__title h1">
               {{ section.settings.heading }}
             </h2>
@@ -28,30 +21,32 @@
           </div>
         </div>
   
-      {% else %}
-  
-          <div class="content_body">
-            <h2 class="content_header rich-text__heading--large section-header__title h1">
-              {{ section.settings.heading }}
-            </h2>
-  
-            <p class="testimonial">{{ section.settings.testimonial }}</p>
-
-            <p class="attribution">— {{ section.settings.attribution }}</p>
-  
-            {% if section.settings.button-boolean == "true" %}
-              <a href="{{ section.settings.link }}" class="button">{{ section.settings.linktext }}</a>
-            {% endif %}
-  
-          </div>
-          <div class="image">
-            {{ section.settings.image | img_url: 'master' | img_tag }}
-          </div>
-  
-      {% endif %}
-  
     </div>
   </section>
+
+  <style>
+    #content_testimonial-image:before {
+      content: "\201c";
+      position: absolute;
+      left: 37%;
+      font-size: 10rem;
+      margin-top: 0;
+      background: #fff;
+      z-index: 0;
+      height: 70px;
+      color: {{ section.settings.quote-border-color }};
+      display: flex;
+      align-items: center;
+    }
+
+    #content_testimonial-image .image img {
+      {% if section.settings.alignment == "row" %}
+        right: 65%;
+      {% else %}
+        left: 65%;
+      {% endif %}
+    }
+  </style>
   
   {% schema %}
     
@@ -69,32 +64,16 @@
           "label":"Image Alignment",
           "options":[
              {
-                "value":"left",
+                "value":"row",
                 "label":"Left"
              },
              {
-                "value":"right",
+                "value":"row-reverse",
                 "label":"Right"
              }
           ],
-          "default":"left"
+          "default":"row"
        },
-       {
-        "type": "radio",
-        "id": "hide-boolean",
-        "label": "Hide this below the fold?",
-        "options": [
-          {
-            "value": "true",
-            "label": "Yes"
-          },
-          {
-            "value": "false",
-            "label": "No"
-          }
-        ],
-        "default": "false"
-      },
        {
           "id":"heading",
           "type":"text",
@@ -139,7 +118,14 @@
         "type": "text",
         "label": "Button text",
         "default": "Click here"
+      },      
+      {
+        "id": "quote-border-color",
+        "type": "color",
+        "label": "Quote Border Color",
+        "default": "#b6b6b6"
       }
+
     ],
     "presets":[
        {
@@ -160,31 +146,14 @@
     justify-items: center;
     margin: 1rem 0;
   }
-
-  #content_testimonial-image:before {
-    content: "\201c";
-    position: absolute;
-    left: 37%;
-    font-size: 10rem;
-    margin-top: -5rem;
-    background: #fff;
-    z-index: 0;
-    height: 90px;
-    color: #b6b6b6;
-  }
   
   #content_testimonial-image .content_wrapper {
     display: flex;
     flex-direction: column;
   }
-
-  #content_testimonial-image .content_body.hidden {
-      display: none;
-  }
   
   #content_testimonial-image .content_body {
     display: flex;
-    flex-direction: row;
   }
   
   #content_testimonial-image .image {
@@ -202,7 +171,6 @@
     padding: 2rem;
     z-index: 10;
     position: absolute;
-    right: 65%;
   }
   
   #content_testimonial-image .content {
