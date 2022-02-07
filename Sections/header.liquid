@@ -119,10 +119,10 @@
       {% endif %}
 
       <header class="site-header" role="banner"{% if section.settings.transparent_header_enable %} data-transparent-header="true"{% endif %}>
-        <div class="wrapper">
-          <div class="grid--full grid--table">
+        <div class="site-header-menu">
+          <div>
 
-        <div class="grid__item large--one-third medium-down--one-half">
+        <div class="large--one-third medium-down--one-half">
             {% comment %}
                 Use the uploaded logo from theme settings if enabled.
                 Site name gets precedence with H1 tag on homepage, div on other pages.
@@ -1066,6 +1066,9 @@ nav.site-header .grid--table > .grid__item {
 
 .site-header{
     padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 
 .site-header__logo-image {
@@ -1082,6 +1085,10 @@ nav.site-header .grid--table > .grid__item {
     padding-right: 1rem;
 }
 
+.site-header-menu {
+  margin-right: 5%;
+}
+
 @media only screen and (min-width: 1200px) {
   .site-nav--mobile {
     display: none!important;
@@ -1091,7 +1098,6 @@ nav.site-header .grid--table > .grid__item {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-left: -85%;
   }
 
   .site-nav--compress .site-nav__item:not(.site-nav__item--compressed) {

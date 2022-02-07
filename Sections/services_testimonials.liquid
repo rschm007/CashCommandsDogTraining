@@ -1,258 +1,329 @@
 <section id="content_testimonial-image">
-    <div class="content_wrapper">
-  
-        <div class="content_body" style="flex-direction: {{ section.settings.alignment }};">
-          <div class="image">
-            {{ section.settings.image | img_url: 'master' | img_tag }}
-          </div>
-          <div class="content" style="border-color:{{ section.settings.quote-border-color }};">
-            <h2 class="content_header rich-text__heading--large section-header__title h1">
-              {{ section.settings.heading }}
-            </h2>
-  
-            <p class="testimonial">{{ section.settings.testimonial }}</p>
+  <div class="content_wrapper">
 
-            <p class="attribution">— {{ section.settings.attribution }}</p>
-  
-            {% if section.settings.button-boolean == "true" %}
-              <a href="{{ section.settings.link }}" class="button">{{ section.settings.linktext }}</a>
-            {% endif %}
-  
-          </div>
+      <div class="content_body" style="flex-direction: {{ section.settings.alignment }};">
+        <div class="image">
+          {{ section.settings.image | img_url: 'master' | img_tag }}
         </div>
-  
-    </div>
-  </section>
+        <div class="content" style="border-color:{{ section.settings.quote-border-color }};">
+          <h2 class="content_header rich-text__heading--large section-header__title h1">
+            {{ section.settings.heading }}
+          </h2>
 
-  <style>
-    #content_testimonial-image:before {
-      content: "\201c";
-      position: absolute;
-      left: 37%;
-      font-size: 10rem;
-      margin-top: 0;
-      background: #fff;
-      z-index: 0;
-      height: 70px;
-      color: {{ section.settings.quote-border-color }};
-      display: flex;
-      align-items: center;
-    }
+          <p class="testimonial">{{ section.settings.testimonial }}</p>
 
-    #content_testimonial-image .image img {
-      {% if section.settings.alignment == "row" %}
-        right: 65%;
-      {% else %}
-        left: 65%;
-      {% endif %}
-    }
-  </style>
-  
-  {% schema %}
-    
-  {
-    "name":"Services Testimonials",
-    "settings":[
-       {
-          "id":"image",
-          "type":"image_picker",
-          "label":"Image"
-       },
-       {
-          "id":"alignment",
-          "type":"select",
-          "label":"Image Alignment",
-          "options":[
-             {
-                "value":"row",
-                "label":"Left"
-             },
-             {
-                "value":"row-reverse",
-                "label":"Right"
-             }
-          ],
-          "default":"row"
-       },
-       {
-          "id":"heading",
-          "type":"text",
-          "label":"Heading",
-          "default":"Heading"
-       },
-       {
-          "id":"testimonial",
-          "type":"richtext",
-          "label":"Testimonial",
-          "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>"
-       },
-       {
-        "id":"attribution",
-        "type":"text",
-        "label":"Attribution",
-        "default":"John Smith"
-        },
-       {
-        "type": "radio",
-        "id": "button-boolean",
-        "label": "Include Button?",
-        "options": [
-          {
-            "value": "true",
-            "label": "Yes"
-          },
-          {
-            "value": "false",
-            "label": "No"
-          }
-        ],
-        "default": "false"
-      },
-       {
-        "id": "link",
-        "type": "url",
-        "label": "Button link"
-      },
-      {
-        "id": "linktext",
-        "type": "text",
-        "label": "Button text",
-        "default": "Click here"
-      },      
-      {
-        "id": "quote-border-color",
-        "type": "color",
-        "label": "Quote Border Color",
-        "default": "#b6b6b6"
-      }
+          <p class="attribution">— {{ section.settings.attribution }}</p>
 
-    ],
-    "presets":[
-       {
-          "name":"Services Testimonials",
-          "category":"Services"
-       }
-    ]
-  }
-  
-  {% endschema %}
-  
-  {% stylesheet %}
-  
-  #content_testimonial-image {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-items: center;
-    margin: 1rem 0;
-  }
-  
-  #content_testimonial-image .content_wrapper {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  #content_testimonial-image .content_body {
-    display: flex;
-  }
-  
-  #content_testimonial-image .image {
-    width: 40%;
-    align-items: center;
-    display: flex;
-  	flex-direction: row-reverse;
-  }
-  
-  #content_testimonial-image .image img {
-    border-radius: 100%;
-    width: 300px;
-    height: 300px;
-    object-fit: cover;
-    padding: 2rem;
-    z-index: 10;
+          {% if section.settings.button-boolean == "true" %}
+
+            <a href="{{ section.settings.link }}" class="button" style="color:{{ section.settings.button-text-color }}; background-color:{{ section.settings.button-bg }}; flex-direction:{{ section.settings.button-icon-position }};">
+      
+              {% if section.settings.button-icon %}
+                <img src="{{ section.settings.button-icon | img_url: 'master' }}" 
+                style="width:{{ section.settings.button-icon-size }}px; 
+                height:{{ section.settings.button-icon-size }}px;
+                filter:{{ section.settings.button-icon-color }};">
+              {% endif %}
+          
+              {{ section.settings.linktext }}
+            </a>
+
+
+          {% endif %}
+
+        </div>
+      </div>
+
+  </div>
+</section>
+
+<style>
+  #content_testimonial-image:before {
+    content: "\201c";
     position: absolute;
-  }
-  
-  #content_testimonial-image .content {
+    left: 37%;
+    font-size: 10rem;
+    margin-top: 0;
+    background: #fff;
+    z-index: 0;
+    height: 70px;
+    color: {{ section.settings.quote-border-color }};
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    padding: 2.5rem 4.5rem;
-    border: 5px solid #b6b6b6;
+    align-items: center;
   }
 
-
-
-  #content_testimonial-image .testimonial {
-      font-style: italic;
+  #content_testimonial-image .image img {
+    {% if section.settings.alignment == "row" %}
+      left: 12%;
+    {% else %}
+      left: 65%;
+    {% endif %}
   }
+</style>
 
-  #content_testimonial-image .attribution {
-    font-weight: 800;
-    font-size: 18px;
-  }
+{% schema %}
   
-  #content_testimonial-image .button {
-      width: max-content;
-    font-family: Lora, serif;
-    display: inline-block;
-    padding: 12px 20px;
-    font-size: 13px;
-    cursor: pointer;
-    text-decoration: none;
-    color: #fff;
-    background-color: #1f2021;
-    border: none;
-    border-radius: 0.62em;
-    transform: translateY(0em);
-    -webkit-transition: all .15s ease-out;
-    -moz-transition: all .15s ease-out;
-    -ms-transition: all .15s ease-out;
-    -o-transition: all .15s ease-out;
-    transition: all .15s ease-out;
-  	margin-top: 1rem;
-  }
-  
-  #content_testimonial-image .button:hover {
-    background-color: #3d3f41!important;
-    color: #fff;
-    transform: translateY(-0.25em);
-  }
-  
-  .index-sections .shopify-section:nth-child(6) {
-    margin-top: -8rem !important;
-  }
-
-  @media screen and (max-width: 768px) {
-    #content_testimonial-image {
-      margin: 2rem 0;
+{
+  "name":"Services Testimonials",
+  "settings":[
+     {
+        "id":"image",
+        "type":"image_picker",
+        "label":"Image"
+     },
+     {
+        "id":"alignment",
+        "type":"select",
+        "label":"Image Alignment",
+        "options":[
+           {
+              "value":"row",
+              "label":"Left"
+           },
+           {
+              "value":"row-reverse",
+              "label":"Right"
+           }
+        ],
+        "default":"row"
+     },
+     {
+        "id":"heading",
+        "type":"text",
+        "label":"Heading",
+        "default":"Heading"
+     },
+     {
+        "id":"testimonial",
+        "type":"richtext",
+        "label":"Testimonial",
+        "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>"
+     },
+     {
+      "id":"attribution",
+      "type":"text",
+      "label":"Attribution",
+      "default":"John Smith"
+      },
+     {
+      "type": "radio",
+      "id": "button-boolean",
+      "label": "Include Button?",
+      "options": [
+        {
+          "value": "true",
+          "label": "Yes"
+        },
+        {
+          "value": "false",
+          "label": "No"
+        }
+      ],
+      "default": "false"
+    },
+     {
+      "id": "link",
+      "type": "url",
+      "label": "Button link"
+    },
+    {
+      "id": "linktext",
+      "type": "text",
+      "label": "Button text",
+      "default": "Click here"
+    },
+     {
+        "id":"button-icon",
+        "type":"image_picker",
+        "label":"Button Icon (*please use a transparent PNG)"
+     },
+     {
+        "id":"button-icon-color",
+        "type":"radio",
+        "label":"Icon Color",
+        "options":[
+           {
+              "value":"brightness(0) invert(1)",
+              "label":"White"
+           },
+           {
+              "value":"",
+              "label":"Default"
+           }
+        ],
+        "default":"brightness(0) invert(1)"
+     },
+     {
+        "id":"button-icon-position",
+        "type":"radio",
+        "label":"Icon Position",
+        "options":[
+           {
+              "value":"row",
+              "label":"Left"
+           },
+           {
+              "value":"row-reverse",
+              "label":"Right"
+           }
+        ],
+        "default":"row"
+     },
+     {
+        "id":"button-icon-size",
+        "type":"range",
+        "min":0,
+        "max":20,
+        "step":1,
+        "unit":"px",
+        "label":"Icon Size",
+        "default":16
+     },
+     {
+      "id": "button-text-color",
+      "type": "color",
+      "label": "Button Text Color",
+      "default": "#fff"
+    },
+    {
+      "id": "button-bg",
+      "type": "color",
+      "label": "Button Background Color",
+      "default": "#1f2021"
+    },    
+    {
+      "id": "quote-border-color",
+      "type": "color",
+      "label": "Quote Border Color",
+      "default": "#b6b6b6"
     }
 
-    #content_testimonial-image .content_body {
-      flex-direction: column-reverse;
-      align-items: center;
-    }
+  ],
+  "presets":[
+     {
+        "name":"Services Testimonials",
+        "category":"Services"
+     }
+  ]
+}
 
-    #content_testimonial-image .image img {
-      position: relative;
-      right: unset;
-      padding: 0;
-      margin: -2rem 0 1rem;
-      height: 200px;
-      width: 200px;
-      min-height: 200px;
-      min-width: 200px;
-    }
+{% endschema %}
 
-    #content_testimonial-image .content {
-      width: 120%;
-      padding: 2rem 3rem;
-    }
+{% stylesheet %}
+
+#content_testimonial-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  margin: 1rem 7rem 1rem 0rem;
+}
+
+#content_testimonial-image .content_wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+#content_testimonial-image .content_body {
+  display: flex;
+}
+
+#content_testimonial-image .image {
+  width: 40%;
+  align-items: center;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+#content_testimonial-image .image img {
+  border-radius: 100%;
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  padding: 2rem;
+  z-index: 10;
+  position: absolute;
+}
+
+#content_testimonial-image .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  padding: 2.5rem 4.5rem;
+  border: 5px solid #b6b6b6;
+}
+
+
+
+#content_testimonial-image .testimonial {
+    font-style: italic;
+}
+
+#content_testimonial-image .attribution {
+  font-weight: 800;
+  font-size: 18px;
+}
+
+#content_testimonial-image .button {
+    width: max-content;
+  font-family: Lora, serif;
+  display: inline-block;
+  padding: 12px 20px;
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: none;
+  color: #fff;
+  background-color: #1f2021;
+  border: none;
+  border-radius: 0.62em;
+  transform: translateY(0em);
+  -webkit-transition: all .15s ease-out;
+  -moz-transition: all .15s ease-out;
+  -ms-transition: all .15s ease-out;
+  -o-transition: all .15s ease-out;
+  transition: all .15s ease-out;
+  margin-top: 1rem;
+}
+
+#content_testimonial-image .button img {
+  margin: 0 10px;
+}
+
+#content_testimonial-image .button:hover {
+  background-color: #3d3f41!important;
+  color: #fff;
+  transform: translateY(-0.25em);
+}
+
+@media screen and (max-width: 768px) {
+  #content_testimonial-image {
+    margin: 2rem 0;
   }
-  
-  {% endstylesheet %}
-  
-  {% javascript %}
-  {% endjavascript %}
-  
+
+  #content_testimonial-image .content_body {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  #content_testimonial-image .image img {
+    position: relative;
+    right: unset;
+    padding: 0;
+    margin: -2rem 0 1rem;
+    height: 200px;
+    width: 200px;
+    min-height: 200px;
+    min-width: 200px;
+  }
+
+  #content_testimonial-image .content {
+    width: 120%;
+    padding: 2rem 3rem;
+  }
+}
+
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

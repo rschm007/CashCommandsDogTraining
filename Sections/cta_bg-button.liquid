@@ -1,52 +1,124 @@
 <div id="cta_bg-button" style="background-image:url('{{section.settings.image.src | img_url: 'master'}}')"​​​​​​>
   <div class="cta_wrapper">
-    <h2 class="rich-text__heading--large section-header__title h1"> {{ section.settings.text-box }} </h2>
-    {{ section.settings.content }}
-    <a href="{{ section.settings.link }}" class="button">{{ section.settings.linktext }}</a>
+    <h2 class="rich-text__heading--large section-header__title h1" style="color: {{ section.settings.text-color }}"> {{ section.settings.text-box }} </h2>
+    <p style="color: {{ section.settings.text-color }}">{{ section.settings.content }}</p>
+
+    <a href="{{ section.settings.link }}" class="button" style="color:{{ section.settings.button-text-color }}; background-color:{{ section.settings.button-bg }}; flex-direction:{{ section.settings.button-icon-position }};">
+    
+      {% if section.settings.button-icon %}
+        <img src="{{ section.settings.button-icon | img_url: 'master' }}" 
+        style="width:{{ section.settings.button-icon-size }}px; 
+        height:{{ section.settings.button-icon-size }}px;
+        filter:{{ section.settings.button-icon-color }};">
+      {% endif %}
+  
+      {{ section.settings.linktext }}
+    </a>
+
   </div>
 </div>
 
 {% schema %}
 
 {
-    "name": "CTA - Bg Image and Button",
-    "settings": [
-      {
-          "id":"image",
-          "type":"image_picker",
-          "label":"Background Image"
-      },
-      {
-        "id": "text-box",
-        "type": "text",
-        "label": "Heading",
-        "default": "Heading"
-      },
-      {
+  "name":"CTA - Bg Image and Button",
+  "settings":[
+     {
+        "id":"image",
+        "type":"image_picker",
+        "label":"Background Image"
+     },
+     {
+        "id":"text-box",
+        "type":"text",
+        "label":"Heading",
+        "default":"Heading"
+     },
+     {
         "id":"content",
         "type":"html",
         "label":"Content",
         "default":"Content goes here."
-      },
-      {
-        "id": "link",
-        "type": "url",
-        "label": "Button link"
-      },
-      {
-        "id": "linktext",
-        "type": "text",
-        "label": "Button text",
-        "default": "Click here"
-      }
-    ],
-    "presets": [
-      {
-        "name": "CTA - Bg Image and Button",
-        "category": "Call To Action"
-      }
-    ]
-  }
+     },
+     {
+        "id":"text-color",
+        "type":"color",
+        "label":"Text Color",
+        "default":"#000"
+     },
+     {
+      "id": "linktext",
+      "type": "text",
+      "label": "Button text",
+      "default": "Click here"
+    },
+     {
+        "id":"button-icon",
+        "type":"image_picker",
+        "label":"Button Icon (*please use a transparent PNG)"
+     },
+     {
+        "id":"button-icon-color",
+        "type":"radio",
+        "label":"Icon Color",
+        "options":[
+           {
+              "value":"brightness(0) invert(1)",
+              "label":"White"
+           },
+           {
+              "value":"",
+              "label":"Default"
+           }
+        ],
+        "default":"brightness(0) invert(1)"
+     },
+     {
+        "id":"button-icon-position",
+        "type":"radio",
+        "label":"Icon Position",
+        "options":[
+           {
+              "value":"row",
+              "label":"Left"
+           },
+           {
+              "value":"row-reverse",
+              "label":"Right"
+           }
+        ],
+        "default":"row"
+     },
+     {
+        "id":"button-icon-size",
+        "type":"range",
+        "min":0,
+        "max":20,
+        "step":1,
+        "unit":"px",
+        "label":"Icon Size",
+        "default":16
+     },
+     {
+      "id": "button-text-color",
+      "type": "color",
+      "label": "Button Text Color",
+      "default": "#fff"
+    },
+    {
+      "id": "button-bg",
+      "type": "color",
+      "label": "Button Background Color",
+      "default": "#1f2021"
+    }
+  ],
+  "presets":[
+     {
+        "name":"CTA - Bg Image and Button",
+        "category":"Call To Action"
+     }
+  ]
+}
 
 {% endschema %}
 
@@ -71,6 +143,7 @@
     margin: auto 0;
     max-width: 80%;
     padding-left: 30%;
+    padding-right: 15%;
   }
 
 #cta_bg-button .button {

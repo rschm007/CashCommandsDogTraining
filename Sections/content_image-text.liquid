@@ -1,306 +1,317 @@
 <section id="content_image-text">
-  <div class="content_wrapper">
-
-      <div class="content_body" style="flex-direction:{{ section.settings.alignment }}">
-        <div class="image">
-
-          {% if section.settings.radius == "rounded" %}
-            <img src="{{ section.settings.image | img_url: 'master' }}" style="border-radius: 100%">
-          {% else %}
-            {{ section.settings.image | img_url: 'master' | img_tag }}
-          {% endif %}
-
-        </div>
-        <div class="content">
-          <h2 class="content_header rich-text__heading--large section-header__title h1" style="color:{{ section.settings.heading-color }}">
-            {{ section.settings.heading }}
-          </h2>
-
-          <p style="color:{{ section.settings.content-color }}">{{ section.settings.content }}</p>
-
-          {% if section.settings.button-boolean == "true" %}
-          <a href="{{ section.settings.link }}" class="button" style="color:{{ section.settings.button-text-color }}; background-color:{{ section.settings.button-bg }}; flex-direction:{{ section.settings.button-icon-position }};">
-    
-            {% if section.settings.button-icon %}
-              <img src="{{ section.settings.button-icon | img_url: 'master' }}" 
-              style="width:{{ section.settings.button-icon-size }}px; 
-              height:{{ section.settings.button-icon-size }}px;
-              filter:{{ section.settings.button-icon-color }};">
-            {% endif %}
-              
-            {{ section.settings.linktext }}</a>
-
-          {% endif %}
-
-        </div>
-      </div>
-
-  </div>
-</section>
-
-{% schema %}
-  
-{
-  "name":"Content-Image, text, btn",
-  "settings":[
-     {
-        "id":"image",
-        "type":"image_picker",
-        "label":"Image"
-     },
-     {
-        "id":"alignment",
-        "type":"select",
-        "label":"Image Alignment",
-        "options":[
-           {
-              "value":"row",
-              "label":"Left"
-           },
-           {
-              "value":"row-reverse",
-              "label":"Right"
-           }
-        ],
-        "default":"row"
-     },
-     {
-        "id":"radius",
-        "type":"select",
-        "label":"Border Shape",
-        "options":[
-           {
-              "value":"rounded",
-              "label":"Rounded"
-           },
-           {
-              "value":"square",
-              "label":"Square"
-           }
-        ],
-        "default":"rounded"
-     },
-     {
-        "id":"heading",
-        "type":"text",
-        "label":"Heading",
-        "default":"Heading"
-     },
-     {
-        "id":"heading-color",
-        "type":"color",
-        "label":"Heading Text Color",
-        "default": "#fff"
-     },
-     {
-        "id":"content",
-        "type":"html",
-        "label":"Content",
-        "default":"Content goes here."
-     },
-     {
-      "id":"content-color",
-      "type":"color",
-      "label":"Content Text Color",
-      "default": "#fff"
+   <div class="content_wrapper">
+ 
+       <div class="content_body" style="flex-direction:{{ section.settings.alignment }}">
+         <div class="image">
+ 
+           {% if section.settings.radius == "rounded" %}
+             <img src="{{ section.settings.image | img_url: 'master' }}" style="border-radius: 100%">
+           {% else %}
+             {{ section.settings.image | img_url: 'master' | img_tag }}
+           {% endif %}
+ 
+         </div>
+         <div class="content">
+           <h2 class="content_header rich-text__heading--large section-header__title h1" style="color:{{ section.settings.heading-color }}">
+             {{ section.settings.heading }}
+           </h2>
+ 
+           <p style="color:{{ section.settings.content-color }}">{{ section.settings.content }}</p>
+ 
+           {% if section.settings.button-boolean == "true" %}
+           <a href="{{ section.settings.link }}" class="button" style="color:{{ section.settings.button-text-color }}; background-color:{{ section.settings.button-bg }}; flex-direction:{{ section.settings.button-icon-position }};">
+     
+             {% if section.settings.button-icon %}
+               <img src="{{ section.settings.button-icon | img_url: 'master' }}" 
+               style="width:{{ section.settings.button-icon-size }}px; 
+               height:{{ section.settings.button-icon-size }}px;
+               filter:{{ section.settings.button-icon-color }};">
+             {% endif %}
+               
+             {{ section.settings.linktext }}</a>
+ 
+           {% endif %}
+ 
+         </div>
+       </div>
+ 
+   </div>
+ </section>
+ 
+ {% schema %}
+   
+ {
+   "name":"Content-Image, text, btn",
+   "settings":[
+      {
+         "id":"image",
+         "type":"image_picker",
+         "label":"Image"
       },
-     {
-        "type":"radio",
-        "id":"button-boolean",
-        "label":"Include Button?",
-        "options":[
-           {
-              "value":"true",
-              "label":"Yes"
-           },
-           {
-              "value":"false",
-              "label":"No"
-           }
-        ],
-        "default":"false"
-     },
-     {
-        "id":"link",
-        "type":"url",
-        "label":"Button link"
-     },
-     {
-        "id":"button-icon",
-        "type":"image_picker",
-        "label":"Button Icon (*please use a transparent PNG)"
-     },
-     {
-        "id":"button-icon-color",
-        "type":"radio",
-        "label":"Icon Color",
-        "options":[
-           {
-              "value":"brightness(0) invert(1)",
-              "label":"White"
-           },
-           {
-              "value":"",
-              "label":"Default"
-           }
-        ],
-        "default":"brightness(0) invert(1)"
-     },
-     {
-        "id":"button-icon-position",
-        "type":"radio",
-        "label":"Icon Position",
-        "options":[
-           {
-              "value":"row",
-              "label":"Left"
-           },
-           {
-              "value":"row-reverse",
-              "label":"Right"
-           }
-        ],
-        "default":"row"
-     },
-     {
-        "id":"button-icon-size",
-        "type":"range",
-        "min":0,
-        "max":20,
-        "step":1,
-        "unit":"px",
-        "label":"Icon Size",
-        "default":16
-     },
-     {
-        "id":"linktext",
-        "type":"text",
-        "label":"Button text",
-        "default":"Click here"
-     },
-     {
-        "id":"button-text-color",
-        "type":"color",
-        "label":"Button Text Color",
-        "default":"#fff"
-     },
-     {
-        "id":"button-bg",
-        "type":"color",
-        "label":"Button Background Color",
-        "default":"#1f2021"
-     }
-  ],
-  "presets":[
-     {
-        "name":"Content-Image, text & button",
-        "category":"Content"
-     }
-  ]
-}
-
-{% endschema %}
-
-{% stylesheet %}
-
-#content_image-text {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-items: center;
-}
-
-#content_image-text .content_wrapper {
-  display: flex;
-  flex-direction: column;
-}
-
-#content_image-text .content_body {
-  display: flex;
-  flex-direction: row;
-}
-
-#content_image-text .image {
-  width: 40%;
-  align-items: center;
-  display: flex;
-}
-
-#content_image-text .image img {
-  max-width: 100%;
-}
-
-#content_image-text .content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 60%;
-  padding: 4.5rem;
-}
-
-#content_image-text .button {
-	width: max-content;
-  font-family: Lora, serif;
-  display: flex;
-  padding: 12px 20px;
-  font-size: 13px;
-  cursor: pointer;
-  text-decoration: none;
-  color: #fff;
-  background-color: #1f2021;
-  border: none;
-  border-radius: 0.62em;
-  transform: translateY(0em);
-  -webkit-transition: all .15s ease-out;
-  -moz-transition: all .15s ease-out;
-  -ms-transition: all .15s ease-out;
-  -o-transition: all .15s ease-out;
-  transition: all .15s ease-out;
-}
-
-#content_image-text .button:hover {
-  background-color: #3d3f41!important;
-  color: #fff;
-  transform: translateY(-0.25em);
-}
-
-#content_image-text .button img {
-  margin: 0 10px;
-}
-
-.index-sections .shopify-section:nth-child(4) {
-  margin-top: 0 !important;
-}
-
-@media screen and (max-width: 768px) {
-
-  #content_image-text .content {
-    padding: 0;
-    width: 80%;
-  }
-
-  #content_image-text .content .content_header {
-    font-size: 32px;
-  }
-
-  #content_image-text .content_body {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  #content_image-text .image {
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-  }
-
-  #content_image-text .image img {
-    max-width: 300px;
-    margin: 2rem;
-  }
-}
-
-{% endstylesheet %}
-
-{% javascript %}
-{% endjavascript %}
+      {
+         "id":"alignment",
+         "type":"select",
+         "label":"Image Alignment",
+         "options":[
+            {
+               "value":"row",
+               "label":"Left"
+            },
+            {
+               "value":"row-reverse",
+               "label":"Right"
+            }
+         ],
+         "default":"row"
+      },
+      {
+         "id":"radius",
+         "type":"select",
+         "label":"Border Shape",
+         "options":[
+            {
+               "value":"rounded",
+               "label":"Rounded"
+            },
+            {
+               "value":"square",
+               "label":"Square"
+            }
+         ],
+         "default":"rounded"
+      },
+      {
+         "id":"heading",
+         "type":"text",
+         "label":"Heading",
+         "default":"Heading"
+      },
+      {
+         "id":"heading-color",
+         "type":"color",
+         "label":"Heading Text Color",
+         "default": "#fff"
+      },
+      {
+         "id":"content",
+         "type":"html",
+         "label":"Content",
+         "default":"Content goes here."
+      },
+      {
+       "id":"content-color",
+       "type":"color",
+       "label":"Content Text Color",
+       "default": "#fff"
+       },
+      {
+         "type":"radio",
+         "id":"button-boolean",
+         "label":"Include Button?",
+         "options":[
+            {
+               "value":"true",
+               "label":"Yes"
+            },
+            {
+               "value":"false",
+               "label":"No"
+            }
+         ],
+         "default":"false"
+      },
+      {
+         "id":"link",
+         "type":"url",
+         "label":"Button link"
+      },
+      {
+         "id":"button-icon",
+         "type":"image_picker",
+         "label":"Button Icon (*please use a transparent PNG)"
+      },
+      {
+         "id":"button-icon-color",
+         "type":"radio",
+         "label":"Icon Color",
+         "options":[
+            {
+               "value":"brightness(0) invert(1)",
+               "label":"White"
+            },
+            {
+               "value":"",
+               "label":"Default"
+            }
+         ],
+         "default":"brightness(0) invert(1)"
+      },
+      {
+         "id":"button-icon-position",
+         "type":"radio",
+         "label":"Icon Position",
+         "options":[
+            {
+               "value":"row",
+               "label":"Left"
+            },
+            {
+               "value":"row-reverse",
+               "label":"Right"
+            }
+         ],
+         "default":"row"
+      },
+      {
+         "id":"button-icon-size",
+         "type":"range",
+         "min":0,
+         "max":20,
+         "step":1,
+         "unit":"px",
+         "label":"Icon Size",
+         "default":16
+      },
+      {
+         "id":"linktext",
+         "type":"text",
+         "label":"Button text",
+         "default":"Click here"
+      },
+      {
+         "id":"button-text-color",
+         "type":"color",
+         "label":"Button Text Color",
+         "default":"#fff"
+      },
+      {
+         "id":"button-bg",
+         "type":"color",
+         "label":"Button Background Color",
+         "default":"#1f2021"
+      }
+   ],
+   "presets":[
+      {
+         "name":"Content-Image, text & button",
+         "category":"Content"
+      }
+   ]
+ }
+ 
+ {% endschema %}
+ 
+ {% stylesheet %}
+ 
+ #about-us #content_image-text {
+    margin: 5rem 7rem;
+    padding: 0 4rem 0;
+ }
+ 
+ #about-us #content_image-text .image {
+    width: 30%;
+ }
+ 
+ #content_image-text {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-items: center;
+   margin: 1rem 7rem;
+ }
+ 
+ #content_image-text .content_wrapper {
+   display: flex;
+   flex-direction: column;
+ }
+ 
+ #content_image-text .content_body {
+   display: flex;
+   flex-direction: row;
+ }
+ 
+ #content_image-text .image {
+   width: 40%;
+   align-items: center;
+   display: flex;
+ }
+ 
+ #content_image-text .image img {
+   max-width: 100%;
+ }
+ 
+ #content_image-text .content {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   width: 60%;
+   padding: 0 4.5rem;
+ }
+ 
+ #content_image-text .button {
+    width: max-content;
+   font-family: Lora, serif;
+   display: flex;
+   padding: 12px 20px;
+   font-size: 13px;
+   cursor: pointer;
+   text-decoration: none;
+   color: #fff;
+   background-color: #1f2021;
+   border: none;
+   border-radius: 0.62em;
+   transform: translateY(0em);
+   -webkit-transition: all .15s ease-out;
+   -moz-transition: all .15s ease-out;
+   -ms-transition: all .15s ease-out;
+   -o-transition: all .15s ease-out;
+   transition: all .15s ease-out;
+ }
+ 
+ #content_image-text .button:hover {
+   background-color: #3d3f41!important;
+   color: #fff;
+   transform: translateY(-0.25em);
+ }
+ 
+ #content_image-text .button img {
+   margin: 0 10px;
+ }
+ 
+ .index-sections .shopify-section:nth-child(4) {
+   margin-top: 0 !important;
+ }
+ 
+ @media screen and (max-width: 768px) {
+ 
+   #content_image-text .content {
+     padding: 0;
+     width: 80%;
+   }
+ 
+   #content_image-text .content .content_header {
+     font-size: 32px;
+   }
+ 
+   #content_image-text .content_body {
+     flex-direction: column;
+     align-items: center;
+   }
+ 
+   #content_image-text .image {
+     width: 100%;
+     align-items: center;
+     justify-content: center;
+   }
+ 
+   #content_image-text .image img {
+     max-width: 300px;
+     margin: 2rem;
+   }
+ }
+ 
+ {% endstylesheet %}
+ 
+ {% javascript %}
+ {% endjavascript %}
+ 

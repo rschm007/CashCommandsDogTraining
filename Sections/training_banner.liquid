@@ -1,0 +1,88 @@
+<a href="{{ section.settings.link }}">
+   <div id="product_banner" style="background-image:url('{{section.settings.image.src | img_url: 'master'}}'); height:{{ section.settings.height }}px"​​​​​​>
+   </div>
+
+   <div id="product_banner_mobile" style="background-image:url('{{section.settings.mobile_image.src | img_url: 'master'}}');"​​​​​​>
+   </div>
+</a>
+  
+  {% schema %}
+  {
+    "name":"Banner Image",
+    "settings":[
+       {
+          "id":"image",
+          "type":"image_picker",
+          "label":"Desktop Image"
+       },
+       {
+         "id":"mobile_image",
+         "type":"image_picker",
+         "label":"Mobile Image"
+      },
+       {
+         "id":"link",
+         "type":"url",
+         "label":"Image link"
+         },
+       {
+           "id":"height",
+           "type":"range",
+           "min": 150,
+            "max": 400,
+            "step": 5,
+            "unit": "px",
+            "label":"Image height",
+            "default": 350
+       }
+    ],
+    "presets":[
+       {
+          "name":"Bg Image",
+          "category":"Content"
+       }
+    ]
+ }
+  
+  {% endschema %}
+  
+  {% stylesheet %}
+  
+   @media screen and (min-width: 769px) {
+      #product_banner {
+         background-size: cover;
+         display: flex;
+         flex-direction: column!important;
+         place-items: flex-end;
+         text-align: center;
+         width: 100%;
+         background-repeat: no-repeat;
+     }
+
+     #product_banner_mobile {
+      display: none;
+      }
+   }
+
+    @media screen and (max-width: 768px) {
+      #product_banner {
+         display: none;
+      }
+
+      #product_banner_mobile {
+         background-size: contain;
+         display: flex;
+         flex-direction: column!important;
+         justify-content: center;
+         width: 100%;
+         background-repeat: no-repeat;
+         height: 500px;
+      }
+    }
+  
+  
+  {% endstylesheet %}
+  
+  {% javascript %}
+  {% endjavascript %}
+  
