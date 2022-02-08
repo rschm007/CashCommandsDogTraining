@@ -31,13 +31,13 @@
 
 <style>
   @media screen and (min-width: 768px) {
-        #HeroWrapper-slideshow, .slick-list {
+        #HeroWrapper-{{ section.id }}, .slick-list {
       height: {{ section.settings.hero_height }}px!important;
     }
   }
 
-  @media screen and (ma-width: 768px) {
-    #HeroWrapper-slideshow .slideshow__overlay {
+  @media screen and (max-width: 768px) {
+    #HeroWrapper-{{ section.id }} .slideshow__overlay {
         background: rgba(0, 0, 0, {{ section.settings.mobile_image_overlay_opacity }}%);
       }
   }
@@ -219,7 +219,6 @@
     {%- endif -%}
   {%- endif -%}
 </div>
-
 {% schema %}
 {
   "name":{
@@ -1340,8 +1339,12 @@
 {% endschema %}
 
 {% stylesheet %}
+.hero__text-wrap.slideshow__overlay {
+   margin-top: 48px!important;
+}
+
 @media screen and (max-width: 768px) {
-  #HeroWrapper-slideshow, .slick-list {
+  #HeroWrapper-slideshow-services, .slick-list {
     height: 100% !important;
   }
 

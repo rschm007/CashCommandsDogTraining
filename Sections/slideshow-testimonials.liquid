@@ -219,7 +219,6 @@
     {%- endif -%}
   {%- endif -%}
 </div>
-
 {% schema %}
 {
   "name":{
@@ -1340,8 +1339,12 @@
 {% endschema %}
 
 {% stylesheet %}
+.hero__text-wrap.slideshow__overlay {
+   margin-top: 48px!important;
+}
+
 @media screen and (max-width: 768px) {
-  #HeroWrapper-slideshow-testimonials, .slick-list {
+  #HeroWrapper-slideshow-services, .slick-list {
     height: 100% !important;
   }
 
